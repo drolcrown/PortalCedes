@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Qrcode Inscrição</title>
+</head>
+<body>
+    <div id="qrcode"></div>
+     <script src="js/qrcode.min.js"></script> 
+    <script>
+        new QRCode(document.getElementById('qrcode'),{
+            text:'http://www.caixa.gov.br/Paginas/home-caixa.aspx',
+            width: 300,
+            height: 300,
+            QRCodecorrectLevel: QRCode.correctLevel
+        });
+    </script>
+</body>
+</html>
