@@ -12,8 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.google.gson.Gson;
-
 import Modelos.Inscricao;
 import Servicos.InscricaoServico;
 
@@ -28,7 +26,7 @@ public class InscricaoRecurso {
 	@Path("/hello")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response hello() {
-		return Response.ok(new Gson().toJson("Hello World")).build();
+		return Response.ok("Hello World").build();
 	}
 
 	@GET

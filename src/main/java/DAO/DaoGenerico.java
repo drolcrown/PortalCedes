@@ -7,8 +7,9 @@ import javax.persistence.Persistence;
 import Modelos.EntidadeGenerica;
 
 public class DaoGenerico<T extends EntidadeGenerica> {
+
 	private static EntityManagerFactory fabrica = null;
-	private static final String PERSISTANCE_UNIT = "cedes160";
+	private static final String PERSISTANCE_UNIT = "primary";
 
 	public static EntityManagerFactory getEntityManagerFactory() {
 		if (fabrica == null) {
@@ -18,8 +19,16 @@ public class DaoGenerico<T extends EntidadeGenerica> {
 		return fabrica;
 	}
 
+	public static void shutdown() {
+		if (fabrica != null) {
+			fabrica.close();
+		}
+	}
+
+	private EntityManager em;
+
 	public T salvar(T entidade) {
-		EntityManager em = getEntityManagerFactory().createEntityManager();
+		em = getEntityManagerFactory().createEntityManager();
 
 		try {
 			em.getTransaction().begin();
@@ -41,7 +50,7 @@ public class DaoGenerico<T extends EntidadeGenerica> {
 	}
 
 	public void excluirPorId(Class<T> classe, Long id) {
-		EntityManager em = getEntityManagerFactory().createEntityManager();
+		em = getEntityManagerFactory().createEntityManager();
 		T entidade = em.find(classe, id);
 		try {
 			em.remove(entidade);
@@ -51,7 +60,7 @@ public class DaoGenerico<T extends EntidadeGenerica> {
 	}
 
 	public T consultarPorId(Class<T> classe, Long id) {
-		EntityManager em = getEntityManagerFactory().createEntityManager();
+		em = getEntityManagerFactory().createEntityManager();
 		T entidade = null;
 
 		try {
@@ -61,21 +70,4 @@ public class DaoGenerico<T extends EntidadeGenerica> {
 		}
 		return entidade;
 	}
-
-	public static void shutdown() {
-		if (fabrica != null) {
-			fabrica.close();
-		}
-	}
-
-	// public T alterar(T entidade){
-	// EntityManager em = getEntityManager();
-	//
-	// try {
-	// entidade = em.merge(entidade);
-	// }finally {
-	// em.close();
-	// }
-	// return entidade;
-	// }
 }
