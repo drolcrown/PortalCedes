@@ -1,21 +1,25 @@
 package DAO;
 
-import Modelos.EntidadeGenerica;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import Modelos.EntidadeGenerica;
+
 public class DaoGenerico <T extends EntidadeGenerica> {
+	private static EntityManagerFactory fabrica = null;
+	private static final String PERSISTANCE_UNIT = "cedes160";
 
-    public EntityManager getEntityManager(){
-        EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("cedes160");
+    public static EntityManagerFactory getEntityManagerFactory(){
+        if (fabrica == null) {
+			fabrica = Persistence.createEntityManagerFactory(PERSISTANCE_UNIT);
+		}
 
-        return fabrica.createEntityManager();
+		return fabrica;
     }
 
     public T salvar(T entidade){
-        EntityManager em = getEntityManager();
+        EntityManager em = getEntityManagerFactory().createEntityManager();
 
         try {
             em.getTransaction().begin();
@@ -37,13 +41,13 @@ public class DaoGenerico <T extends EntidadeGenerica> {
     }
 
     public void excluirPorId(Class<T> classe, Long id){
-        EntityManager em = getEntityManager();
+    	EntityManager em = getEntityManagerFactory().createEntityManager();
         T entidade = em.find(classe, id);
         excluir(entidade);
     }
 
     public void excluir(T entidade){
-        EntityManager em = getEntityManager();
+    	EntityManager em = getEntityManagerFactory().createEntityManager();
 
         try {
             em.getTransaction().begin();
@@ -55,7 +59,7 @@ public class DaoGenerico <T extends EntidadeGenerica> {
     }
 
     public T consultarPorId(Class<T> classe, Long id){
-        EntityManager em = getEntityManager();
+    	EntityManager em = getEntityManagerFactory().createEntityManager();
         T entidade = null;
 
         try {

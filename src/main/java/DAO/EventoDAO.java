@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class EventoDAO extends DaoGenerico<Evento> {
     public List<Evento> recuperarEventoPorNome(String nome){
-        Query query = getEntityManager()
+        Query query = getEntityManagerFactory().createEntityManager()
                 .createQuery("SELECT evento FROM Evento AS evento WHERE evento.nome = :nome");
         query.setParameter("nome", nome);
 
@@ -18,7 +18,7 @@ public class EventoDAO extends DaoGenerico<Evento> {
     }
 
     public List<Evento> recuperarTodos(){
-        Query query = getEntityManager().createQuery("SELECT evento FROM Evento AS evento");
+        Query query = getEntityManagerFactory().createEntityManager().createQuery("SELECT evento FROM Evento AS evento");
 
         return query.getResultList();
     }

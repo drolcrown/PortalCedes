@@ -38,6 +38,10 @@
 	<classpathentry kind="lib" path="C:/Users/e794749/Documents/workspace/dependencias/hibernate/jboss-archive-browsing.jar"/>
 	<classpathentry kind="lib" path="C:/Users/e794749/Documents/workspace/dependencias/hibernate/jta.jar"/>
 	<classpathentry kind="lib" path="C:/Users/e794749/Documents/workspace/dependencias/hibernate/log4j-1.2.11.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

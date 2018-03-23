@@ -1,69 +1,87 @@
 package Modelos;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name ="tb_evento")
-public class Evento implements EntidadeGenerica{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Table(name = "tb_evento")
+public class Evento implements EntidadeGenerica {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-    @Column
+
+	@Column
 	private String nome;
-    @Column
+
+	@Column
 	private String dataInicio;
-    @Column
+
+	@Column
 	private String dataFim;
+
 	@Column
 	private String descricao;
-    @Column
+
+	@Column
 	private String local;
-    @Column
+
+	@Column
 	private String hora;
+
 	@Column
 	private String imagem;
-	
+
 	public Evento() {
 	}
 
-	public Evento(String nome, String dataI, String dataF, String local, String hora, String descricao) {
+	public Evento(Long id, String nome, String dataInicio, String dataFim, String descricao, String local, String hora,
+			String imagem) {
+		super();
+		this.id = id;
 		this.nome = nome;
-		this.dataInicio = dataI;
-		this.dataFim = dataF;
+		this.dataInicio = dataInicio;
+		this.dataFim = dataFim;
+		this.descricao = descricao;
 		this.local = local;
 		this.hora = hora;
-		this.descricao = descricao;
+		this.imagem = imagem;
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getDataInicio() {
 		return dataInicio;
 	}
+
 	public void setDataInicio(String dataInicio) {
 		this.dataInicio = dataInicio;
 	}
+
 	public String getDataFim() {
 		return dataFim;
 	}
+
 	public void setDataFim(String dataFim) {
 		this.dataFim = dataFim;
-	}
-	public String getLocal() {
-		return local;
-	}
-	public void setEstado(String local) {
-		this.local = local;
-	}
-	public String getHora() {
-		return hora;
-	}
-	public void setHora(String hora) {
-		this.hora = hora;
 	}
 
 	public String getDescricao() {
@@ -74,11 +92,40 @@ public class Evento implements EntidadeGenerica{
 		this.descricao = descricao;
 	}
 
-	public Long getId() {
-		return id;
+	public String getLocal() {
+		return local;
 	}
 
-	public Class getClasseEntidade() {
-		return this.getClass();
+	public void setLocal(String local) {
+		this.local = local;
 	}
+
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+
+	@Override
+	public String toString() {
+		return "{id=" + id + "},\n{nome=" + nome + "},\n{dataInicio=" + dataInicio + "},\n{dataFim=" + dataFim
+				+ "},\n{descricao=" + descricao + "},\n{local=" + local + "},\n{hora=" + hora + "},\n{imagem=" + imagem
+				+ "}";
+	}
+
+	@Override
+	public Class<?> getClasseEntidade() {
+		return null;
+	}
+
 }
