@@ -338,8 +338,8 @@ function procurarElementoID(evento) {
 function adicionarEventoBD(evento) {
 	$.ajax({
 		method : "POST",
-		contentType : "json",
-		dataType : "json",
+		contentType : "application/json",
+		dataType : "application/json",
 		url : "rest/eventos/salvar",
 		data : evento
 	}).done(function(data) {
@@ -357,6 +357,9 @@ function percorreForms(form) {
 			}
 			nomeVar = form[i].name;
 			valorVar = form[i].value;
+			if(valorVar.toString === ""){
+				valorVar = null;
+			}
 			json += '"' + nomeVar.toString() + '": "' + valorVar.toString()
 					+ '"';
 			if (form[i + 1].nodeName !== 'BUTTON') {

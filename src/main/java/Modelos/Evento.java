@@ -122,10 +122,4 @@ public class Evento implements EntidadeGenerica {
 				+ "},\n{descricao=" + descricao + "},\n{local=" + local + "},\n{hora=" + hora + "},\n{imagem=" + imagem
 				+ "}";
 	}
-
-	@Override
-	public Class<?> getClasseEntidade() {
-		return null;
-	}
-
 }
