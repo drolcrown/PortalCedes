@@ -66,7 +66,7 @@ function mostrarEventos() {
 		prev.style.display = ''
 		next.style.display = ''
 	}
-	adicionarEventos()
+	adicionarEventos(evento)
 }
 
 function criarEventos() {
@@ -117,7 +117,15 @@ function criarEvento() {
 	// }
 }
 
-function adicionarEventos() {
+function  carregarEventos(eventosBD){
+	eventos = eventosBD;
+	for(i=0; i < eventosBD.length; i++){
+		console.log(eventosBD[i].nome)
+		adicionarEventos(eventosBD[i]);
+	}
+}
+
+function adicionarEventos(eventoBD) {
 	var contPass = 1, contAtual = 1
 
 	// Criando o cartão
@@ -143,6 +151,7 @@ function adicionarEventos() {
 			+ "<small></small><br><img src='img/iconEvento/map-location.svg' class='iconeEvento img-fluid'>"
 			+ "<small></small></div></div></div></div></button><hr>"
 
+
 	for (i = 0; i < eventos.length; i++) {
 		var cartaoId
 
@@ -158,16 +167,14 @@ function adicionarEventos() {
 			// Criando o objeto dentro do carrousel
 			evento.appendChild(carouselItem)
 			carouselItem.innerHTML = divsCarousel
-
 			cartaoId = document.getElementById('cartao')
-			cartaoId.id = cartaoId.id + contAtual
-
+			cartaoId.id = cartaoId.id + eventoBD.id
 			contAtual++
 			document.getElementById(cartaoId.id).children[0].style.height = 300 + "px";
 		} else {
 			var evento = document.getElementById('eventosPassados')
 			var secao = document.createElement('div')
-			secao.id = 'parente' + contPass;
+			secao.id = 'parente' + eventoBD.id;
 
 			evento.appendChild(secao)
 			secao.innerHTML = eventoString
@@ -186,7 +193,7 @@ function adicionarEventos() {
 		var img = cartaoEncontrado.children[0]
 		var nome = cartaoEncontrado.children[1]
 
-		img.src = eventos[i].imagem
+		img.src = 'img/about-plan.jpg'
 		mesEvento.textContent = meses[desmebrarData(eventos[i].dataInicio, 1)]
 				.substring(0, 3)
 		diaEvento.textContent = desmebrarData(eventos[i].dataInicio, 0)
@@ -204,7 +211,6 @@ function verificarData(dataEnviada) {
 	if (ano >= data.getFullYear()) {
 		if (ano == data.getFullYear()) {
 			if (mes > data.getMonth()) {
-				console.log('maior')
 				return true
 			}
 			if (mes == data.getMonth()) {
@@ -242,10 +248,8 @@ function detalheModal(objeto) {
 			+ " de " + objeto.children[2].children[0].children[0].textContent
 	data.style.marginRight = "5%";
 	titulo.textContent = objeto.children[1].textContent
-	descricao.textContent = "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are"
-			+ " perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains"
-			+ "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are"
-			+ " perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+	console.log(objeto)
+	descricao.textContent = eventos[2].descricao
 }
 
 function dataPorExtenso(data) {
@@ -343,9 +347,24 @@ function adicionarEventoBD(evento) {
 		url : "rest/eventos/salvar",
 		data : evento
 	}).done(function(data) {
-		console.log(data)
 	});
 }
+
+function recuperarEventosBD(evento) {
+	$.ajax({
+		method : "GET",
+		contentType : "application/json",
+		url : "rest/eventos/todos",
+		data: data
+	}).done(function(data) {
+		carregarEventos(data);
+	});
+}
+
+function teste(varl){
+	console.log(varl)
+}
+
 
 function percorreForms(form) {
 	var nomeVar, valorVar;
@@ -370,7 +389,5 @@ function percorreForms(form) {
 		}
 	}
 	json += '\n}';
-	console.log(json)
-	console.log(JSON.parse(json))
 	adicionarEventoBD(json);
 }

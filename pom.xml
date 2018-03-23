@@ -163,4 +163,5 @@
 	<build>
 		<finalName>Cedes160</finalName>
 	</build>
+	<packaging>war</packaging>
 </project>
