@@ -184,7 +184,7 @@ function id( el ){
 return document.getElementById( el );
 }
 window.onload = function(){
-id('telefone').onkeyup = function(){
+id('#telefone').onkeyup = function(){
   mascara( this, mtel );
 }
 }

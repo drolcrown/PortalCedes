@@ -86,36 +86,30 @@ function mostraCalendario() {
     });
 }
 
-function mostrarEventos(eventoRec) {
+function mostrarEventos() {
     var evento = $("#carousel")[0];
     var prev = $("#prev")[0];
     var next = $("#next")[0];
     var numEvento = $("#numEventos")[0];
-    
+    // criarEventos()
+    // criarEventos()
+    // criarEventos()
+    // criarEventos()
+
     numEvento.textContent = 'Numero de eventos encontrados: ' + eventos.length
-    if (eventoRec.length == 0) {
+    if (evento.length == 0) {
         evento.innerHTML = "<div id='semEvento'> <h1>Nao Existem Eventos</h1> </div>"
         prev.style.display = 'none'
         next.style.display = 'none'
     }
-    if (eventoRec.length == 1) {
+    if (evento.length == 1) {
         evento.removeChild(document.getElementById('semEvento'))
     }
-    if (eventoRec.length > 1) {
-        console.log("ENTREI Mostrar Eventos")
-        prev.style.display = '';
-        next.style.display = '';
-        for(i=0; i<eventoRec.length; i++){
-            adicionarEventos(eventoRec[i]);
-        }
+    if (evento.length > 1) {
+        prev.style.display = ''
+        next.style.display = ''
     }
-}
-
-
-function alterarImagem() {
-    var img = document.getElementById("inputPerfil");
-    
-    img.src = "img/eaes"
+    // adicionarEventos()
 }
 
 function criarEventos() {
@@ -137,11 +131,40 @@ function criarEventos() {
 
 function carregarEventos(eventosBD) {
     eventos = eventosBD;
-    mostrarEventos(eventos);
+    for(i=0; i<eventosBD.length; i++){
+        adicionarEventoBD(eventosBD[i]);
+    }
 }
 
-//window.close('adicionaEventoForm.html')
-    // window.open('calendarioEventos.html')
+function criarEvento() {
+    var nome = document.getElementById('nomeEvento')
+    var dataI = document.getElementById('dataInicio')
+    var dataF = document.getElementById('dataFim')
+    var desc = document.getElementById('descricaoEvento')
+    var tit = document.getElementById('tituloEvento')
+    var img = document.getElementById('imgEvento')
+
+    // if(validarData()) {
+    eventos.push({
+        nome: nome.value,
+        dataInicio: dataI.value,
+        dataFim: dataF.value,
+        descricao: desc.value,
+        local: '',
+        hora: '',
+        // imagem: img.value,
+        ativo: true,
+        indice: cont
+    })
+
+    window.close('adicionaEventoForm.html')
+        // window.open('calendarioEventos.html')
+    cont++
+    // }else{
+    //     dataI.oninvalid=alert('Por favor, Preencha os Campos de Data')
+    // }
+}
+
 function adicionarEventos(eventoBD) {
     var contPass = 1,
         contAtual = 1;
@@ -194,8 +217,8 @@ function popularEvento(cartaoEncontrado, eventoBD) {
     var nome = cartaoEncontrado.children[1];
 
     img.src = eventoBD.imagem;
-    mesEvento.textContent = meses[desmembrarData(eventoBD.dataInicio, 1)].substring(0, 3);
-    diaEvento.textContent = desmembrarData(eventoBD.dataInicio, 0);
+    mesEvento.textContent = meses[desmebrarData(eventoBD.dataInicio, 1)].substring(0, 3);
+    diaEvento.textContent = desmebrarData(eventoBD.dataInicio, 0);
     nome.textContent = eventoBD.nome;
     localEvento.textContent = eventoBD.local;
     horaEvento.textContent = eventoBD.hora;
@@ -328,35 +351,6 @@ function desmembrarJson(json) {
 
     return vetorTupla;
 }
-function desmembrarJson(json) {
-    var tupla, tupla2;
-    var vetorTupla = [];
-    var chave = true;
-    for(i=0; i<json.length; i++){
-        if(json[i] === '"'){
-            tupla = "";
-            tupla2 = "";
-            while(json[i] !== '\n') {
-                i++;
-                if(json[i] === ':'){
-                    chave = false;
-                }
-                if(json[i] !== '"' && json[i] !== ' ' && json[i] !== ':'
-                    && json[i] !== ',' && json[i] !== '\n') {
-                    if(chave) {
-                        tupla += json[i];
-                    }else{
-                        tupla2 += json[i];
-                    }
-                }
-            }
-            vetorTupla.push({chave:tupla, valor:tupla2});
-            chave = true;
-        }
-    }
-
-    return vetorTupla;
-}
 function procurarElementoID(evento) {
 	var parenteID = evento.parentElement.id.substring(0, 6);
 	var parente = evento.parentElement;
@@ -408,16 +402,14 @@ function percorreForms(form) {
     for(i = 0 ; i < tamanho; i++) {
         if(inputs[i].type !== "checkbox" && inputs[i].type !== "radio"
             && inputs[i].type !== "button" && inputs[i].type !== "submit"){
-//        	if(inputs[i].type === "file"){
-//        		console.log(inputs[i]);
-//        	}
             nomeVar = inputs[i].name;
             valorVar = inputs[i].value;
             json += '"' + nomeVar.toString() + '": "' + valorVar.toString() + '",\n';
         }
     }
     json = json.substring(0, json.length-2) + "\n}";
-    adicionarEventoBD(json);
-    
-    return json;
+    // console.log(json);
+    // console.log(JSON.parse(json))
+    // adicionarEventoBD(json);
+    return adicionarEventoBD(json);
 }
