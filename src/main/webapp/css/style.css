@@ -810,18 +810,18 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #about .about-col:hover .icon,
 #coordenacao .about-col:hover .icon,
-#talentos .about-col:hover .icon,
+/*#talentos .about-col:hover .icon*/
 #calendarioEventos .about-col:hover .icon,
-#ideia .about-col:hover .icon {
+/*#ideia .about-col:hover .icon*/ {
     /* background-color: #fff; */
     background-color: #2466AF;
 }
 
 #about .about-col:hover i,
 #coordenacao .about-col:hover i,
-#talentos .about-col:hover i,
-#calendarioEventos .about-col:hover i,
-#ideia .about-col:hover i {
+/*#talentos .about-col:hover i,*/
+#calendarioEventos .about-col:hover i
+/*#ideia .about-col:hover i */{
     /* color: #18d26e; */
     color: #fff;
 }
@@ -883,7 +883,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #services .icon i {
-    /* color: #18d26e; */
     color: #dd872d;
     font-size: 36px;
     line-height: 1;
@@ -902,7 +901,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #services .box:hover .title a {
-    /* color: #18d26e; */
     color: #2466AF;
 }
 
@@ -1018,7 +1016,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     font-weight: bold;
     font-size: 48px;
     display: block;
-    color: #18d26e;
+    color: #d;
 }
 
 #facts .counters p {
@@ -1591,7 +1589,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #contact .contact-info a:hover {
-    color: #18d26e;
+    color: #2466AF;
 }
 
 #contact .contact-address,
@@ -1616,8 +1614,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #contact .form #sendmessage {
-    color: #18d26e;
-    border: 1px solid #18d26e;
+    color: #2466AF;
+    border: 1px solid #2466AF;
     display: none;
     text-align: center;
     padding: 15px;

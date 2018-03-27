@@ -54,7 +54,7 @@ Header
         <nav id="nav-menu-container">
             <ul class="nav-menu">
                 <li class="menu-active"><a href="#intro">Home</a></li>
-                <li><a href="#coordenacao">Fluxo coordenação</a></li>
+                <li><a href="#coordenacao">Fluxo da coordenação</a></li>
                 <li><a href="#talentos">Cadastro de talentos</a></li>
                 <li><a href="#ideia">Cadastro de ideias</a></li>
                 <li><a href="#calendarioEventos">Eventos</a></li>
@@ -94,7 +94,7 @@ Intro Section
                 <div class="carousel-item" style="background-image: url('img/intro-carousel/1.png');">
                     <div class="carousel-container">
                         <div class="carousel-content">
-                            <h2>Fluxo coordenação</h2>
+                            <h2>Fluxo da coordenação</h2>
                             <p></p>
                             <a href="#coordenacao" class="btn-get-started scrollto">Mais Informações</a>
                         </div>
@@ -218,12 +218,11 @@ Intro Section
                 <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="about-col">
                         <div class="img">
-                       		<img src="img/talentos/download.png"  alt="" class="img-fluid">
-                            <div class="icon"><i class="ion-ios-paper-outline"></i></div>
-                            <!--<img src="img/talentos.jpg" alt="" class="img-fluid">
-                            <a href="#talentos" onclick="carregar('formulario.html')">
-                                <div class="icon"><i class="ion-ios-paper-outline"></i></div>
-                            </a>-->
+                            <img src="img/talentos.jpg" alt="" class="img-fluid">
+                            <a href="#talentos"> <!-- onclick="carregar('formulario.html')" -->
+                            <img  src="img/em_breve.png" class=" icon" style="background:white" title="Em Breve"></a>
+                                <!--<div class="icon"><i class="ion-alert-circled" title="Em Breve"></i></div>-->
+                            </a>
                         </div>
 
                         <h2 class="title"><a href="#">Cadastro de talentos</a></h2>
@@ -243,11 +242,9 @@ Intro Section
                 <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="about-col">
                         <div class="img">
-                       		<img src="img/talentos/download.png"  alt="" class="img-fluid">
-                            <div class="icon"><i class="ion-ios-paper-outline"></i></div>
-                            <!--<img src="img/ideias.jpg" alt="" class="img-fluid">
-                            <a href="#talentos" onclick="carregar('cadastroIdeias.html')">
-                                <div class="icon"><i class="ion-ios-paper-outline"></i></div></a>-->
+                            <img src="img/ideias.jpg" alt="" class="img-fluid">
+                            <a href="#ideia"> <!--onclick="carregar('cadastroIdeias.html')"-->
+                                <img  src="img/em_breve.png" class=" icon " style="background:white" title="Em Breve"></a>
                         </div>
 
                         <h2 class="title">Cadastro de ideias</h2>
@@ -271,12 +268,12 @@ Intro Section
                 <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="about-col">
                         <div class="img">
-                            <img src="img/evento.jpeg" alt="" class="img-fluid">
+                            <img src="img/imagemEventoIntra.png" alt="" class="img-fluid">
                             <a href="#calendarioEventos" onclick="carregarTelaInteira('formevento.html')">
                                 <div class="icon"><i class="ion-ios-calendar-outline"></i></div>
                             </a>
                         </div>
-                        <h2 class="title">Eventos</h2>
+                        <h2 class="title">Evento de Intraempreendedorismo</h2>
                         <p></p>
                     </div>
                 </div>
@@ -486,6 +483,8 @@ Intro Section
                                         <header class="section-header-ferramenta">
                                             <h3>Business Model Canvas</h3>
                                             <p>É uma ferramenta que traduz a forma da organização criar e capturar valor e permite desenvolver e esboçar, para com base nas ideias geradas, diferentes modelos de negócio ou até mesmo aprimorar os existentes.</p>
+                                            <p>Mais detalhes segue o tutorial no link abaixo:</p>
+											<p><a href="">Tutorial Business Model Canvas </a></p>
                                         </header>
                                         </body>
                                     </div>
@@ -498,8 +497,37 @@ Intro Section
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-lg-4 col-md-6 ferramenta-item filter-web wow fadeInUp">
+                    <div class="ferramenta-wrap">
+                        <figure>
+                            <img src="img/ferramentas/projeto_canvas.png" class="img-fluid" alt="">
+                            <a href="img/ferramentas/projeto_canvas.png" class="link-preview" data-lightbox="ferramenta" data-title="Projeto Canvas" title="Preview"><i class="ion ion-eye"></i></a>
+                            <a class="link-details" data-toggle="modal" data-target=".bd-example-modal-lg-canvas" data-title="Projeto Canvas" title="Mais Detalhes"><i class="ion ion-android-open"></i></a>
+                            <div class="modal fade bd-example-modal-lg-canvas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
 
-                <div class="col-lg-4 col-md-6 ferramenta-item filter-ideia wow fadeInUp" data-wow-delay="0.1s">
+                                        <body>
+                                        <header class="section-header-ferramenta">
+                                            <h3>Canvas Projeto</h3>
+                                            <p></p>
+                                            <p>Mais detalhes segue o tutorial no link abaixo:</p>
+											<p><a href="">Tutorial Canvas Projeto </a></p>
+                                        </header>
+                                        </body>
+                                    </div>
+                                </div>
+                            </div>
+                        </figure>
+
+                        <div class="ferramenta-info">
+                            <h4>Canvas Projeto</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-lg-4 col-md-6 ferramenta-item filter-ideia wow fadeInUp" data-wow-delay="0.1s">
                     <div class="ferramenta-wrap">
                         <figure>
                             <img src="img/ferramentas/brainstorming.jpg" class="img-fluid" alt="">
@@ -524,7 +552,7 @@ Intro Section
                             <h4>Brainstorming</h4>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
                 <!-- <div class="col-lg-4 col-md-6 ferramenta-item filter-ideia wow fadeInUp" data-wow-delay="0.2s">
                     <div class="ferramenta-wrap">
@@ -624,6 +652,8 @@ Intro Section
                                             <h3>Design Thinking</h3>
                                             <p>É um conjunto de métodos e processos para abordar problemas, a partir da vivência do contexto e entendimento do aspecto humano envolvido, seguido da geração e prototipação de ideias para resolvê-los.
                                                 É uma nova forma de pensar a solução de um problema, permitindo a união entre a viabilidade tecnológica e a geração de valor tanto para o cliente como para o negócio.</p>
+                                            <p>Mais detalhes segue o tutorial no link abaixo:</p>
+											<p><a href="">Tutorial Design Thinking </a></p>
                                         </header>
                                         </body>
                                     </div>
@@ -932,55 +962,71 @@ Intro Section
 
             <div class="row justify-content-md-center">
 
-                <div class="col-lg-3 col-md-6 wow fadeInUp">
+                <div class="col-lg-2 col-md-6 wow fadeInUp">
                     <div class="member">
-                        <img src="img/equipe/images2.jpg" class="img-fluid" alt="">
+                        <img src="img/equipe/cleibe.jpg" class="img-fluid" alt="">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Cleibe Vieira</h4>
                                 <span>Coordenador de Ti</span>
-                                <span>(61)-xxxx-xxxx</span>
-                                <div class="social">
+                                <span>(61)-3448-6136</span>
+                               <!-- <div class="social">
                                     <a href=""><i class="fa fa-twitter"></i></a>
                                     <a href=""><i class="fa fa-google-plus"></i></a>
                                     <a href=""><i class="fa fa-linkedin"></i></a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+              
+                <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="member">
-                        <img src="img/equipe/images1.jpg" class="img-fluid" alt="">
+                        <img src="img/equipe/luis.jpg" class="img-fluid" alt="">
+                        <div class="member-info">
+                            <div class="member-info-content">
+                                <h4>Luis Antônio Campos</h4>
+                                <span>Consultor de TI</span>
+                                <span>(61)-3448-6048</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                  <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="member">
+                        <img src="img/equipe/susana.jpg" class="img-fluid" alt="">
                         <div class="member-info">
                             <div class="member-info-content">
                                 <h4>Susana Blanco</h4>
-                                <span><i>Consultora de Ti</i></span>
-                                <span>(61)-xxxx-xxxx</span>
-                                <div class="social">
-                                    <a href=""><i class="fa fa-twitter"></i></a>
-                                    <a href=""><i class="fa fa-google-plus"></i></a>
-                                    <a href=""><i class="fa fa-linkedin"></i></a>
-                                </div>
+                                <span><i>Consultora de TI</i></span>
+                                <span>(61)-3448-5673</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                  <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="member">
-                        <img src="img/equipe/download.jpg" class="img-fluid" alt="">
+                        <img src="img/equipe/renato.jpg" class="img-fluid" alt="">
                         <div class="member-info">
                             <div class="member-info-content">
-                                <h4>Luis Antonio</h4>
-                                <span>Consultor de Ti</span>
-                                <span>(61)-3448-6048</span>
-                                <div class="social">
-                                    <a href=""><i class="fa fa-twitter"></i></a>
-                                    <a href=""><i class="fa fa-google-plus"></i></a>
-                                    <a href=""><i class="fa fa-linkedin"></i></a>
-                                </div>
+                                <h4>Renato Lopes</h4>
+                                <span>Técnico bancário novo</span>
+                                <span>(61)-xxxx-xxxx</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="member">
+                        <img src="img/equipe/leandro.jpg" class="img-fluid" alt="">
+                        <div class="member-info">
+                            <div class="member-info-content">
+                                <h4>Leandro Abreu</h4>
+                                <span>Consultor de TI SE</span>
+                                <span>(61)-3448-5949</span>
                             </div>
                         </div>
                     </div>
@@ -1017,7 +1063,7 @@ Intro Section
                     <div class="contact-phone">
                         <i class="ion-ios-telephone-outline"></i>
                         <h3>Telefone</h3>
-                        <p>061 - 3348-6048</p>
+                        <p>061 - 3348-6136</p>
                     </div>
                 </div>
 
@@ -1095,14 +1141,7 @@ Footer
     <div class="footer-top">
         <div class="container">
             <div class="text-center">
-
-                <div class="social-links">
-                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                    <a href="https://www.instagram.com" class="instagram"><i class="fa fa-instagram"></i></a>
-                    <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-                    <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
-                </div>
-
+            
             </div>
         </div>
     </div>

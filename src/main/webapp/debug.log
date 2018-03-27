@@ -32,3 +32,4 @@
 [0220/112736.379:ERROR:process_info.cc(632)] range at 0x326c2f5400000000, size 0x1b9 fully unreadable
 [0220/112736.379:ERROR:process_info.cc(632)] range at 0x0, size 0x1b9 fully unreadable
 [0321/103952.014:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acesso Negado} Um processo solicitou acesso a um objeto, mas o direito de acesso não lhe foi concedido. (0xc0000022)
+[0327/130530.131:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acesso Negado} Um processo solicitou acesso a um objeto, mas o direito de acesso não lhe foi concedido. (0xc0000022)
