@@ -36,6 +36,17 @@ public class Evento implements EntidadeGenerica {
 	@Column
 	private String imagem;
 
+	@Column
+	private Boolean ativo;
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	public Evento() {
 	}
 

@@ -1,9 +1,13 @@
 package Servicos;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jgroups.util.Tuple;
+
 import DAO.EventoDAO;
 import Modelos.Evento;
-
-import java.util.List;
+import util.JsonUtil;
 
 /**
  * Created by RSouza on 01/03/18.
@@ -11,20 +15,37 @@ import java.util.List;
 public class EventoServico {
 	private EventoDAO repositorioEvento = new EventoDAO();
 
-
-	public List<Evento> listarEventos(){
+	public List<Evento> listarEventos() {
 		return repositorioEvento.recuperarTodos();
 	}
 
-	public List<Evento> buscarEvento(String nome){
-	 return repositorioEvento.recuperarEventoPorNome(nome);
+	public List<Evento> buscarEvento(String json) {
+		List<Tuple> vetorTupla = new JsonUtil().desmembrarJson(json);
+		List<Evento> lista = new ArrayList<Evento>();
+
+		for (Tuple tupla : vetorTupla) {
+			lista.addAll(buscarEvento(tupla.getVal1().toString(), tupla.getVal2().toString()));
+		}
+		return lista;
 	}
 
-	public Evento salvarEvento(Evento evento) throws Exception{
+	public List<Evento> buscarEvento(String nome, String tipo) {
+		return repositorioEvento.recuperarEvento(nome, tipo);
+		// if (tipo.equals("nome")) {
+		// }
+		// if (tipo.equals("data")) {
+		// return repositorioEvento.recuperarEventoPorNome(nome);
+		// }
+		// if (tipo.equals("local")) {
+		// return repositorioEvento.recuperarEventoPorNome(nome);
+		// }
+	}
+
+	public Evento salvarEvento(Evento evento) throws Exception {
 		return repositorioEvento.salvar(evento);
 	}
 
-	public void excluirEvento(Long id){
+	public void excluirEvento(Long id) {
 		repositorioEvento.excluirPorId(Evento.class, id);
 	}
 }

@@ -5,7 +5,6 @@ import Modelos.Evento;
 
 public class teste {
 	public static void main(String[] args) {
-
 		Evento evento = new Evento(1L, "Rafa3", "12/03/2016", "22/03/2016", "Brasilia", "9h", "", " ");
 
 		EventoDAO eventoDAO = new EventoDAO();

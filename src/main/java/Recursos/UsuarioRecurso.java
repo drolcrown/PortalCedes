@@ -14,16 +14,16 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 
-import Modelos.Evento;
-import Servicos.EventoServico;
+import Modelos.Usuario;
+import Servicos.UsuarioServico;
 
 /**
  * Created by RSouza on 01/03/18.
  */
-@Path("/eventos")
-public class EventoRecurso {
+@Path("/usuarios")
+public class UsuarioRecurso {
 	private static String NOME = "nome", LOCAL = "local", DATA = "data";
-	private EventoServico servicoEvento = new EventoServico();
+	private UsuarioServico servicoUsuario = new UsuarioServico();
 
 	@GET
 	@Path("/hello")
@@ -35,59 +35,59 @@ public class EventoRecurso {
 	@GET
 	@Path("/todos")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Evento> listarEventos() {
-		return servicoEvento.listarEventos();
+	public List<Usuario> listarUsuarios() {
+		return servicoUsuario.listarUsuarios();
 	}
 
 	@GET
 	@Path("/buscar/{json}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Evento> buscarEvento(@PathParam("json") String json) {
-		return servicoEvento.buscarEvento(json);
+	public List<Usuario> buscarUsuario(@PathParam("json") String json) {
+		return servicoUsuario.buscarUsuario(json);
 	}
 
 	@GET
 	@Path("/buscarPorLocal/{nome}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Evento> buscarEventoPorNome(@PathParam("nome") String nome) {
-		return servicoEvento.buscarEvento(nome, NOME);
+	public List<Usuario> buscarUsuarioPorNome(@PathParam("nome") String nome) {
+		return servicoUsuario.buscarUsuario(nome, NOME);
 	}
 
 	@GET
 	@Path("/buscarPorData/{data}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Evento> buscarEventoPorData(@PathParam("data") String data) {
-		return servicoEvento.buscarEvento(data, DATA);
+	public List<Usuario> buscarUsuarioPorData(@PathParam("data") String data) {
+		return servicoUsuario.buscarUsuario(data, DATA);
 	}
 
 	@GET
 	@Path("/buscarPorLocal/{local}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Evento> buscarEventoPorLocal(@PathParam("local") String local) {
-		return servicoEvento.buscarEvento(local, LOCAL);
+	public List<Usuario> buscarUsuarioPorLocal(@PathParam("local") String local) {
+		return servicoUsuario.buscarUsuario(local, LOCAL);
 	}
 
 	@POST
 	@Path("/salvar")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Evento salvarEvento(Evento evento) throws Exception {
-		return servicoEvento.salvarEvento(evento);
+	public Usuario salvarUsuario(Usuario Usuario) throws Exception {
+		return servicoUsuario.salvarUsuario(Usuario);
 	}
 
 	@DELETE
 	@Path("/excluir/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void excluirEvento(@PathParam("id") Long id) {
-		servicoEvento.excluirEvento(id);
-		// return Response.ok(new Gson().toJson("Evento Excluido")).build();
+	public void excluirUsuario(@PathParam("id") Long id) {
+		servicoUsuario.excluirUsuario(id);
+		// return Response.ok(new Gson().toJson("Usuario Excluido")).build();
 	}
 	//
 	// @GET
 	// @Path("/pesquisa")
 	// @Produces(MediaType.TEXT_HTML)
-	// public Response pesquisarEvento(){
+	// public Response pesquisarUsuario(){
 	// return
 	//
 	// }

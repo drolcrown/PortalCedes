@@ -10,7 +10,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import Modelos.Ideia;
 import Servicos.IdeiaServico;
@@ -21,13 +20,6 @@ import Servicos.IdeiaServico;
 @Path("/cadastroIdeia")
 public class IdeiaRecurso {
 	private IdeiaServico servicoIdeia = new IdeiaServico();
-
-	@GET
-	@Path("/hello")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response hello() {
-		return Response.ok("Hello World").build();
-	}
 
 	@GET
 	@Path("/todos")

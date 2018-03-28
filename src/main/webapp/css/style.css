@@ -1971,6 +1971,7 @@ textarea {
     display: none;
 } */
 
+/*incricao evento*/
 #imgevento{
     width: 100%;
   }
@@ -1980,3 +1981,50 @@ textarea {
     font-family:"Open Sans", sans-serif;
     font-size: 35px;
   }
+
+/*cracha*/
+#ptext{
+    text-align: center;
+    font-family:"Open Sans", sans-serif;
+    font-size: 70px;
+    color: #DE6900;
+    text-shadow: 2px 2px 4px #2466AF;
+}
+
+.flex-container{
+    display: flex;
+    height: 600px;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    background-color: #fff;
+    border: 1px solid #000000;
+    border-radius: 20px;
+}
+.flex-container > div {
+    padding: 120px 20px 0 0;
+    /* background-color: #fff; */
+    width: 500px;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+  }
+  #img_user{
+    padding: 120px 30px 0 0;
+  }
+  #logo {
+    padding: 30px 20px 0 0;
+  }
+
+  #mat{
+    padding: 30px 300px 0 0;
+  }
+
+  #nome{
+    padding: 30px 50px 0 0;
+}
+
+/* exemplo teste */
+.media {
+padding: 30px 10px;
+}
