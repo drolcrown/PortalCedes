@@ -70,31 +70,31 @@
 						<div id="errormessage"></div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<input type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu nome" data-rule="nome" data-msg=""
-								 value="">
+								<input required type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu nome" data-rule="nome" 
+								 value="" data-msg="Digite seu nome!" >
 								<div class="validation"></div>
 							</div>
 							<div class="form-group col-md-6">
-								<input type="text" class="form-control" name="matricula" id="matricula" maxlength="7" placeholder="Digite sua matrícula"
+								<input required type="text" class="form-control" name="matricula" id="matricula" maxlength="7" placeholder="Digite sua matrícula"
 								 data-rule="matricula" data-msg="Matrícula inválida!" value="">
 								<div class="validation"></div>
 							</div>
 							<div class="form-group col-md-6">
-								<input type="text" class="form-control" name="unidade" id="unidade" maxlength="10" placeholder="Digite sua unidade" data-rule="unidade"
+								<input required type="text" class="form-control" name="unidade" id="unidade" maxlength="10" placeholder="Digite sua unidade" data-rule="unidade"
 								 data-msg="" value="">
 								<div class="validation"></div>
 							</div>
 							<div class="form-group col-md-6">
-								<input type="text" class="form-control" name="ramal" id="ramal" maxlength="4" placeholder="Digite seu ramal" data-rule="ramal"
+								<input type="tel" class="form-control" name="ramal" id="ramal" maxlength="4" placeholder="Digite seu ramal" data-rule="ramal"
 								 data-msg="Digite ramal válido" value="">
 								<div class="validation"></div>
 							</div>
 							<div class="form-group col-xs-6 col-sm-6 text-center">
-								<input type="email" class="form-control" name="email" id="email" placeholder="Digite seu email" value="">
+								<input required type="email" class="form-control" name="email" id="email" placeholder="Digite seu email" value="">
 								<div class="validation"></div>
 							</div>
 							<div class="form-group col-xs-6 col-sm-6 text-center">
-								<input type="text" class="form-control" name="fone" id="telefone" maxlength="15" placeholder="Digite seu celular" data-rule="telefone"
+								<input required type="tel" class="form-control" name="fone" id="telefone" maxlength="15" placeholder="Digite seu celular" data-rule="telefone"
 								 data-msg="Digite apenas números" value="">
 								<div class="validation"></div>
 							</div>
@@ -102,11 +102,9 @@
 						</div>
 						<br>
 						<div class="text-center">
-							<button class="btn btn-primary" type="button" onclick="percorreForms(this.form, 'usuarios')">Enviar Cadastro</button>
+							<button class="btn btn-primary" type="submit" onclick="percorreForms(this.form, 'usuarios')">Enviar Cadastro</button>
 						</div>
 					</form>
-
-					<h1 hidden id="emailTeste">Lorem Ipsum</h1>
 				</div>
 			</div>
 		</div>
