@@ -352,9 +352,13 @@ function adicionarEventoBD(evento, endpoint) {
 	}).done(function(data) {
 	    recuperarEventosBD();
 	});
-    alert('Seu Evento Foi Cadastrado');
+	novoEndPoint = endpoint.substring(0, endpoint.length-1); 
+    alert("Seu " + novoEndPoint + " foi cadastrado com sucesso!!");
     if(endpoint === 'eventos'){
     	window.close('adicionaEventoForm.html');
+    }
+    if(endpoint === "usuarios"){
+    	window.close('formevento.html');
     }
 }
 
@@ -375,11 +379,12 @@ function teste(varl){
 
 
 function percorreForms(form, endpoint) {
+
+    if(validarForm()){
     var inputs = form.getElementsByTagName("Input");
 
     var nomeVar, valorVar, nome, mat;
     var json = '{\n', tamanho = inputs.length;
-
     for(i = 0 ; i < tamanho; i++) {
         if(inputs[i].type !== "checkbox" && inputs[i].type !== "radio"
             && inputs[i].type !== "button" && inputs[i].type !== "submit"){
@@ -388,23 +393,25 @@ function percorreForms(form, endpoint) {
 //        	}
             nomeVar = inputs[i].name;
             valorVar = inputs[i].value;
-            if(nomeVar === "nome"){
-            	nome = valorVar;
-            }
-            if(nomeVar === "matricula"){
-            	mat = valorVar;
-            }
-            if(nomeVar === "email"){
-	            if(endpoint === "usuarios"){
-	            	enviarQRCODE(valorVar, nome, mat);
-	            }
-            }
+//            if(nomeVar === "nome"){
+//            	nome = valorVar;
+//            }
+//            if(nomeVar === "matricula"){
+//            	mat = valorVar;
+//            }
+//            if(nomeVar === "email"){
+//	            if(endpoint === "usuarios"){
+//	            	window.close('formevento.html');
+////	            	enviarQRCODE(valorVar, nome, mat);
+//	            }
+//            }
             json += '"' + nomeVar.toString() + '": "' + valorVar.toString() + '",\n';
         }
     }
     json = json.substring(0, json.length-2) + "\n}";
     adicionarEventoBD(json, endpoint);
     return json;
+    }
 }
 
 
@@ -424,16 +431,154 @@ function enviarQRCODE(email, nome, mat){
     + "&Subject=" + escape("Descricao Evento")
     + "&body=" + escape(document.getElementById('emailTeste').textContent);
     
-    var telaAntiga = telaInscricao.outerHTML;
-    telaInscricao.innerHTML = cracha;
-    var nomeCracha = telaInscricao.children[0].children[1].children[0].children[1].children[1].children[1].children[0];
-    var matCracha = telaInscricao.children[0].children[1].children[0].children[1].children[1].children[0];
-    
-    matCracha.textContent = "Matricula: " + mat;
-    nomeCracha.textContent = "Nome: " + nome;
+//    var telaAntiga = telaInscricao.outerHTML;
+//    telaInscricao.innerHTML = cracha;
+//    var nomeCracha = telaInscricao.children[0].children[1].children[0].children[1].children[1].children[1].children[0];
+//    var matCracha = telaInscricao.children[0].children[1].children[0].children[1].children[1].children[0];
+//    
+//    matCracha.textContent = "Matricula: " + mat;
+//    nomeCracha.textContent = "Nome: " + nome;
 //    open('cracha.html');
     // So Precisa gerar o qrcode na pagina de inscricao
         
     window.location.href = link;
     return false;
+}
+
+
+function validarForm(){
+	var validtel = false;
+	var teste = false;
+	    "use strict";
+	    //Contact
+	    $('form.contactForm').submit(function() {
+	      var f = $(this).find('.form-group'),
+	        ferror = false,
+	        emailExp = /^[a-z0-9._-]+@[a-z]+.[a-z]+.br/ig;
+	        
+	      f.children('input').each(function() { // run all inputs
+	  
+	        var i = $(this); // current input
+	        var rule = i.attr('data-rule');
+	  
+	        if (rule !== undefined) {
+	          var ierror = false; // error flag for current input
+	          var pos = rule.indexOf(':', 0);
+	          if (pos >= 0) {
+	            var exp = rule.substr(pos + 1, rule.length);
+	            rule = rule.substr(0, pos);
+	          } else {
+	            rule = rule.substr(pos + 1, rule.length);
+	          }
+	  
+	          switch (rule) {
+	            case 'required':
+	              if (i.val() === '') {
+	                ferror = ierror = true;
+	              }
+	              break;
+	  
+	            case 'minlen':
+	              if (i.val().length < parseInt(exp)) {
+	                ferror = ierror = true;
+	              }
+	                break;
+
+	            case 'matricula':
+	            if(i.val()[0]  !== 'c' && i.val()[0] !== 'e' && i.val()[0] !== 'f'){
+	                  ferror = ierror = true;
+	            }else{
+	                var matr = i.val().substring(1, i.val().length);
+	                if(isNaN(matr)){
+	                  ferror = ierror = true;
+	                }
+	            }
+	                break;
+
+	            case 'nome':
+	            var nomeExp = i.val().match(nomeExp);
+	            nomeExp = new RegExp("^[a-z ]+","ig");
+	            if (!nomeExp.test(i.val())) {
+	              ferror = ierror = true;
+	            }
+	               break; 
+	            
+	            case 'email':
+	              if (!emailExp.test(i.val())){
+	                ferror = ierror = true;
+	              }
+	                break;
+
+	            case 'unidade':
+	              var unidadeExp = i.val().match(unidadeExp);
+	              unidadeExp = new RegExp("^[a-z ]+","ig");
+	                if (!unidadeExp.test(i.val())) {
+	                  ferror = ierror = true;
+	                }
+	                  break;
+
+	            // case 'telefone':
+	            // if(validtel){
+	            //     var telefoneExp = i.val().match(telefoneExp);
+	            //     telefoneExp = new RegExp("^[(-0-9]+","ig");
+	            //       if (!telefoneExp.test(i.val())) {
+	            //           ferror = ierror = true;
+	            //         }
+	            //     }
+	            //      break;
+	  
+	            case 'checked':
+	              if (!i.attr('checked')) {
+	                ferror = ierror = true;
+	              }
+	                break;
+	  
+	            case 'regexp':
+	              exp = new RegExp(exp);
+	              if (!exp.test(i.val())) {
+	                ferror = ierror = true;
+	              }
+	                break;
+	          }
+	          i.next('.validation').html((ierror ? (i.attr('data-msg') !== undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
+	        }
+	      });
+	      f.children('textarea').each(function() { // run all inputs
+	  
+	        var i = $(this); // current input
+	        var rule = i.attr('data-rule');
+	  
+	        if (rule !== undefined) {
+	          var ierror = false; // error flag for current input
+	          var pos = rule.indexOf(':', 0);
+	          if (pos >= 0) {
+	            var exp = rule.substr(pos + 1, rule.length);
+	            rule = rule.substr(0, pos);
+	          } else {
+	            rule = rule.substr(pos + 1, rule.length);
+	          }
+	  
+	          switch (rule) {
+	            case 'required':
+	              if (i.val() === '') {
+	                ferror = ierror = true;
+	              }
+	              break;
+	  
+	            case 'minlen':
+	              if (i.val().length < parseInt(exp)) {
+	                ferror = ierror = true;
+	              }
+	              break;
+	          }
+	          i.next('.validation').html((ierror ? (i.attr('data-msg') != undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
+	        }
+	      });
+	      if (ferror) {
+	    	  teste = false;
+	    	  return false;}
+	      else var str = $(this).serialize();
+    	  teste = true;
+	    });
+	      return teste;
 }

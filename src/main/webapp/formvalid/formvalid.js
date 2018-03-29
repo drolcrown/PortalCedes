@@ -1,7 +1,6 @@
 var validtel = false;
 jQuery(document).ready(function($) {
     "use strict";
-  
     //Contact
     $('form.contactForm').submit(function() {
       var f = $(this).find('.form-group'),
@@ -130,7 +129,7 @@ jQuery(document).ready(function($) {
       else var str = $(this).serialize();
       $.ajax({
         type: "POST",
-        url: "contactform/contactform.php",
+        url: "js/funcao.js",
         data: str,
         success: function(msg) {
           // alert(msg);
