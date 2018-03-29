@@ -4,10 +4,11 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.gov.caixa.bsb</groupId>
-	<artifactId>Cedes160</artifactId>
+	<artifactId>empreendaTI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Cedes160 Maven Webapp</name>
+	<name>empreendaTI Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<packaging>war</packaging>
 
 	<properties>
 		<!-- Explicitly declaring the source encoding eliminates the following 
@@ -167,6 +168,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>Cedes160</finalName>
+		<finalName>empreendaTI</finalName>
 	</build>
 </project>

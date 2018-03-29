@@ -30,6 +30,20 @@ var eventoString =
     "<small></small><br><img src='img/iconEvento/map-location.svg' class='iconeEvento img-fluid'>" +
     "<small></small></div></div></div></div></button><hr>";
 
+
+var cracha = "<div style='background: linear-gradient(to right, rgba(20,100,160, 0.95), rgba(44, 167, 207, 0.9));'>" +
+	"<div class='container animated flash'>" +
+	"<p id='ptext'>Bem Vindo!!!</p>" +
+	"</div>" +
+	"<div class='container'>" +
+	"<div class='flex-container animated lightSpeedIn'>" +
+    		"<div id='img_userCracha'><img src='img/user.jpg' alt='user' class='img-thumbnail'></div>" +
+	        "<div id='logoCracha'><p><img src='img/caixa_logo.png' alt='caixa' class='img-thumbnail'></p>" +
+	        "<div id='matCracha'><div>Matricula:</div>" +
+	        "<div id='nomeCracha'><div>Nome:</div></div></div></div>" +
+	"</div></div></div>"
+
+
 function mostrarDivCheckbox(nomeDiv) {
     var listaInputs = nomeDiv.parentNode.getElementsByTagName("input");
     var button = document.getElementById("buttonPesquisa");
@@ -363,7 +377,7 @@ function teste(varl){
 function percorreForms(form, endpoint) {
     var inputs = form.getElementsByTagName("Input");
 
-    var nomeVar, valorVar;
+    var nomeVar, valorVar, nome, mat;
     var json = '{\n', tamanho = inputs.length;
 
     for(i = 0 ; i < tamanho; i++) {
@@ -374,10 +388,15 @@ function percorreForms(form, endpoint) {
 //        	}
             nomeVar = inputs[i].name;
             valorVar = inputs[i].value;
+            if(nomeVar === "nome"){
+            	nome = valorVar;
+            }
+            if(nomeVar === "matricula"){
+            	mat = valorVar;
+            }
             if(nomeVar === "email"){
 	            if(endpoint === "usuarios"){
-	            	enviarQRCODE(valorVar);
-	            	console.log("ENTREI NO QR");
+	            	enviarQRCODE(valorVar, nome, mat);
 	            }
             }
             json += '"' + nomeVar.toString() + '": "' + valorVar.toString() + '",\n';
@@ -398,14 +417,21 @@ function gerarQRCODE(){
     });
 }
 
-function enviarQRCODE(email){
+function enviarQRCODE(email, nome, mat){
+	var telaInscricao = document.getElementById('cadastroEvent');
     var link = "mailto:" + email
     + "?cc=" + email
     + "&Subject=" + escape("Descricao Evento")
     + "&body=" + escape(document.getElementById('emailTeste').textContent);
     
-    document.getElementById('cadastroEvent').innerHTML = eventoString;
+    var telaAntiga = telaInscricao.outerHTML;
+    telaInscricao.innerHTML = cracha;
+    var nomeCracha = telaInscricao.children[0].children[1].children[0].children[1].children[1].children[1].children[0];
+    var matCracha = telaInscricao.children[0].children[1].children[0].children[1].children[1].children[0];
     
+    matCracha.textContent = "Matricula: " + mat;
+    nomeCracha.textContent = "Nome: " + nome;
+//    open('cracha.html');
     // So Precisa gerar o qrcode na pagina de inscricao
         
     window.location.href = link;
