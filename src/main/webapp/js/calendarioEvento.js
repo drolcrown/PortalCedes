@@ -30,20 +30,6 @@ var eventoString =
     "<small></small><br><img src='img/iconEvento/map-location.svg' class='iconeEvento img-fluid'>" +
     "<small></small></div></div></div></div></button><hr>";
 
-
-var cracha = "<div style='background: linear-gradient(to right, rgba(20,100,160, 0.95), rgba(44, 167, 207, 0.9));'>" +
-	"<div class='container animated flash'>" +
-	"<p id='ptext'>Bem Vindo!!!</p>" +
-	"</div>" +
-	"<div class='container'>" +
-	"<div class='flex-container animated lightSpeedIn'>" +
-    		"<div id='img_userCracha'><img src='img/user.jpg' alt='user' class='img-thumbnail'></div>" +
-	        "<div id='logoCracha'><p><img src='img/caixa_logo.png' alt='caixa' class='img-thumbnail'></p>" +
-	        "<div id='matCracha'><div>Matricula:</div>" +
-	        "<div id='nomeCracha'><div>Nome:</div></div></div></div>" +
-	"</div></div></div>"
-
-
 function mostrarDivCheckbox(nomeDiv) {
     var listaInputs = nomeDiv.parentNode.getElementsByTagName("input");
     var button = document.getElementById("buttonPesquisa");
@@ -100,29 +86,31 @@ function mostraCalendario() {
     });
 }
 
-function mostrarEventos(eventosPassados, eventosAtuais, eventos) {
+function mostrarEventos(eventoRec) {
     var evento = $("#carousel")[0];
     var prev = $("#prev")[0];
     var next = $("#next")[0];
     var numEvento = $("#numEventos")[0];
     
     numEvento.textContent = 'Numero de eventos encontrados: ' + eventos.length
-    if (eventoAtuais.length == 0) {
+    if (eventoRec.length == 0) {
         evento.innerHTML = "<div id='semEvento'> <h1>Nao Existem Eventos</h1> </div>"
         prev.style.display = 'none'
         next.style.display = 'none'
     }
-    if (eventoAtuais.length == 1) {
+    if (eventoRec.length == 1) {
         evento.removeChild(document.getElementById('semEvento'))
     }
-    if (eventoAtuais.length > 1) {
+    if (eventoRec.length > 1) {
+        console.log("ENTREI Mostrar Eventos")
         prev.style.display = '';
         next.style.display = '';
-        for(i=0; i<eventos.length; i++){
-            adicionarEventos(eventos[i]);
+        for(i=0; i<eventoRec.length; i++){
+            adicionarEventos(eventoRec[i]);
         }
     }
 }
+
 
 function alterarImagem() {
     var img = document.getElementById("inputPerfil");
@@ -130,58 +118,71 @@ function alterarImagem() {
     img.src = "img/eaes"
 }
 
-function carregarEventos(eventosBD) {
-	var eventosPassados = [], eventosAtuais = [];
-	
-    for(i=0; i<eventosBD.length; i++){
-        eventosBD.ativo = verificarData(eventosBD.dataInicio);
-        if(eventosBD.ativo){
-        	eventosAtuais.push(eventosBD[i]);
-        }else{
-        	eventosPassados.push(eventosBD[i]);
-        }
-    }
-    mostrarEventos(eventosPassados, eventosAtuais, eventosBD);
+function criarEventos() {
+    var i = cont + 6
+    eventos.push({
+        nome: 'nome do evento',
+        dataInicio: '23/03/201' + i,
+        dataFim: '11/02/201' + cont,
+        descricao: 'Lorem ipsum dolor sit amet,' + 'consectetur adipiscing elit, sed do eiusmod tempor' +
+            'incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam ',
+        imagem: 'img/about-plan.jpg',
+        local: 'Brasilia',
+        hora: '10h',
+        ativo: true,
+        indice: cont
+    })
+    cont++
 }
 
+function carregarEventos(eventosBD) {
+    eventos = eventosBD;
+    mostrarEventos(eventos);
+}
+
+//window.close('adicionaEventoForm.html')
+    // window.open('calendarioEventos.html')
 function adicionarEventos(eventoBD) {
-	var contPass = 1,
-    contAtual = 1;
-    var cartaoId, evento;
+    var contPass = 1,
+        contAtual = 1;
 
-    if (eventoBD.Ativo) {
-        evento = document.getElementById('carousel')
-        var carouselItem = document.createElement('div')
-        carouselItem.id = 'parente' + eventoBD.id;
-        if (evento.children.length === 0) {
-            carouselItem.className = 'carousel-item active'
+    for (i = 0; i < eventos.length; i++) {
+        var cartaoId, evento;
+
+        if (verificarData(eventos[i].dataInicio)) {
+            evento = document.getElementById('carousel')
+            var carouselItem = document.createElement('div')
+            carouselItem.id = 'parente' + contAtual;
+            if (evento.children.length === 0) {
+                carouselItem.className = 'carousel-item active'
+            } else {
+                carouselItem.className = 'carousel-item'
+            }
+            // Criando o objeto dentro do carrousel
+            evento.appendChild(carouselItem)
+            carouselItem.innerHTML = divsCarousel
+
+            cartaoId = document.getElementById('cartao')
+            cartaoId.id = cartaoId.id + contAtual
+
+            contAtual++
+            document.getElementById(cartaoId.id).children[0].style.height = 300 + "px";
         } else {
-            carouselItem.className = 'carousel-item'
+            evento = document.getElementById('eventosPassados')
+            var secao = document.createElement('div')
+            secao.id = 'parente' + contPass;
+
+            evento.appendChild(secao)
+            secao.innerHTML = eventoString
+
+            // Atribuir id pra cada cartao e procurar os elementos filhos 
+            cartaoId = document.getElementById('cartaoPassado')
+            cartaoId.id = cartaoId.id + contPass
+            contPass++
+            document.getElementById(cartaoId.id).children[0].style.height = 150 + "px";
         }
-        // Criando o objeto dentro do carrousel
-        evento.appendChild(carouselItem)
-        carouselItem.innerHTML = divsCarousel
-
-        cartaoId = document.getElementById('cartao')
-        cartaoId.id = cartaoId.id + eventoBD.id;
-
-        contAtual++
-        document.getElementById(cartaoId.id).children[0].style.height = 300 + "px";
-    } else {
-        evento = document.getElementById('eventosPassados')
-        var secao = document.createElement('div')
-        secao.id = 'parente' + contPass;
-
-        evento.appendChild(secao)
-        secao.innerHTML = eventoString
-
-        // Atribuir id pra cada cartao e procurar os elementos filhos 
-        cartaoId = document.getElementById('cartaoPassado')
-        cartaoId.id = cartaoId.id + contPass
-        contPass++
-        document.getElementById(cartaoId.id).children[0].style.height = 150 + "px";
+        popularEvento(document.getElementById(cartaoId.id), eventos[i]);
     }
-    popularEvento(document.getElementById(cartaoId.id), eventoBD);
 }
 
 function popularEvento(cartaoEncontrado, eventoBD) {
@@ -207,6 +208,7 @@ function verificarData(dataEnviada) {
     if (ano >= data.getFullYear()) {
         if (ano == data.getFullYear()) {
             if (mes > data.getMonth()) {
+                console.log('maior')
                 return true
             }
             if (mes == data.getMonth()) {
@@ -326,7 +328,35 @@ function desmembrarJson(json) {
 
     return vetorTupla;
 }
+function desmembrarJson(json) {
+    var tupla, tupla2;
+    var vetorTupla = [];
+    var chave = true;
+    for(i=0; i<json.length; i++){
+        if(json[i] === '"'){
+            tupla = "";
+            tupla2 = "";
+            while(json[i] !== '\n') {
+                i++;
+                if(json[i] === ':'){
+                    chave = false;
+                }
+                if(json[i] !== '"' && json[i] !== ' ' && json[i] !== ':'
+                    && json[i] !== ',' && json[i] !== '\n') {
+                    if(chave) {
+                        tupla += json[i];
+                    }else{
+                        tupla2 += json[i];
+                    }
+                }
+            }
+            vetorTupla.push({chave:tupla, valor:tupla2});
+            chave = true;
+        }
+    }
 
+    return vetorTupla;
+}
 function procurarElementoID(evento) {
 	var parenteID = evento.parentElement.id.substring(0, 6);
 	var parente = evento.parentElement;
@@ -342,27 +372,18 @@ function procurarElementoID(evento) {
 	return parente
 }
 
-function adicionarEventoBD(evento, endpoint) {
+function adicionarEventoBD(evento) {
 	$.ajax({
 		method : "POST",
 		contentType : "application/json",
 		dataType : "application/json",
-		url : "rest/"+ endpoint+ "/salvar",
+		url : "rest/eventos/salvar",
 		data : evento
 	}).done(function(data) {
-	    recuperarEventosBD();
 	});
-	novoEndPoint = endpoint.substring(0, endpoint.length-1); 
-    alert("Seu " + novoEndPoint + " foi cadastrado com sucesso!!");
-    if(endpoint === 'eventos'){
-    	window.close('adicionaEventoForm.html');
-    }
-    if(endpoint === "usuarios"){
-    	window.close('formevento.html');
-    }
 }
 
-function recuperarEventosBD() {
+function recuperarEventosBD(evento) {
 	$.ajax({
 		method : "GET",
 		contentType : "application/json",
@@ -378,13 +399,12 @@ function teste(varl){
 }
 
 
-function percorreForms(form, endpoint) {
-
-    if(validarForm()){
+function percorreForms(form) {
     var inputs = form.getElementsByTagName("Input");
 
-    var nomeVar, valorVar, nome, mat;
+    var nomeVar, valorVar;
     var json = '{\n', tamanho = inputs.length;
+
     for(i = 0 ; i < tamanho; i++) {
         if(inputs[i].type !== "checkbox" && inputs[i].type !== "radio"
             && inputs[i].type !== "button" && inputs[i].type !== "submit"){
@@ -393,192 +413,11 @@ function percorreForms(form, endpoint) {
 //        	}
             nomeVar = inputs[i].name;
             valorVar = inputs[i].value;
-//            if(nomeVar === "nome"){
-//            	nome = valorVar;
-//            }
-//            if(nomeVar === "matricula"){
-//            	mat = valorVar;
-//            }
-//            if(nomeVar === "email"){
-//	            if(endpoint === "usuarios"){
-//	            	window.close('formevento.html');
-////	            	enviarQRCODE(valorVar, nome, mat);
-//	            }
-//            }
             json += '"' + nomeVar.toString() + '": "' + valorVar.toString() + '",\n';
         }
     }
     json = json.substring(0, json.length-2) + "\n}";
-    adicionarEventoBD(json, endpoint);
-    return json;
-    }
-}
-
-
-function gerarQRCODE(){
-    return new QRCode(document.getElementById('qrcode'),{
-        text:'index.html',
-        width: 300,
-        height: 300,
-        QRCodecorrectLevel: QRCode.correctLevel
-    });
-}
-
-function enviarQRCODE(email, nome, mat){
-	var telaInscricao = document.getElementById('cadastroEvent');
-    var link = "mailto:" + email
-    + "?cc=" + email
-    + "&Subject=" + escape("Descricao Evento")
-    + "&body=" + escape(document.getElementById('emailTeste').textContent);
+    adicionarEventoBD(json);
     
-//    var telaAntiga = telaInscricao.outerHTML;
-//    telaInscricao.innerHTML = cracha;
-//    var nomeCracha = telaInscricao.children[0].children[1].children[0].children[1].children[1].children[1].children[0];
-//    var matCracha = telaInscricao.children[0].children[1].children[0].children[1].children[1].children[0];
-//    
-//    matCracha.textContent = "Matricula: " + mat;
-//    nomeCracha.textContent = "Nome: " + nome;
-//    open('cracha.html');
-    // So Precisa gerar o qrcode na pagina de inscricao
-        
-    window.location.href = link;
-    return false;
-}
-
-
-function validarForm(){
-	var validtel = false;
-	var teste = false;
-	    "use strict";
-	    //Contact
-	    $('form.contactForm').submit(function() {
-	      var f = $(this).find('.form-group'),
-	        ferror = false,
-	        emailExp = /^[a-z0-9._-]+@[a-z]+.[a-z]+.br/ig;
-	        
-	      f.children('input').each(function() { // run all inputs
-	  
-	        var i = $(this); // current input
-	        var rule = i.attr('data-rule');
-	  
-	        if (rule !== undefined) {
-	          var ierror = false; // error flag for current input
-	          var pos = rule.indexOf(':', 0);
-	          if (pos >= 0) {
-	            var exp = rule.substr(pos + 1, rule.length);
-	            rule = rule.substr(0, pos);
-	          } else {
-	            rule = rule.substr(pos + 1, rule.length);
-	          }
-	  
-	          switch (rule) {
-	            case 'required':
-	              if (i.val() === '') {
-	                ferror = ierror = true;
-	              }
-	              break;
-	  
-	            case 'minlen':
-	              if (i.val().length < parseInt(exp)) {
-	                ferror = ierror = true;
-	              }
-	                break;
-
-	            case 'matricula':
-	            if(i.val()[0]  !== 'c' && i.val()[0] !== 'e' && i.val()[0] !== 'f'){
-	                  ferror = ierror = true;
-	            }else{
-	                var matr = i.val().substring(1, i.val().length);
-	                if(isNaN(matr)){
-	                  ferror = ierror = true;
-	                }
-	            }
-	                break;
-
-	            case 'nome':
-	            var nomeExp = i.val().match(nomeExp);
-	            nomeExp = new RegExp("^[a-z ]+","ig");
-	            if (!nomeExp.test(i.val())) {
-	              ferror = ierror = true;
-	            }
-	               break; 
-	            
-	            case 'email':
-	              if (!emailExp.test(i.val())){
-	                ferror = ierror = true;
-	              }
-	                break;
-
-	            case 'unidade':
-	              var unidadeExp = i.val().match(unidadeExp);
-	              unidadeExp = new RegExp("^[a-z ]+","ig");
-	                if (!unidadeExp.test(i.val())) {
-	                  ferror = ierror = true;
-	                }
-	                  break;
-
-	            // case 'telefone':
-	            // if(validtel){
-	            //     var telefoneExp = i.val().match(telefoneExp);
-	            //     telefoneExp = new RegExp("^[(-0-9]+","ig");
-	            //       if (!telefoneExp.test(i.val())) {
-	            //           ferror = ierror = true;
-	            //         }
-	            //     }
-	            //      break;
-	  
-	            case 'checked':
-	              if (!i.attr('checked')) {
-	                ferror = ierror = true;
-	              }
-	                break;
-	  
-	            case 'regexp':
-	              exp = new RegExp(exp);
-	              if (!exp.test(i.val())) {
-	                ferror = ierror = true;
-	              }
-	                break;
-	          }
-	          i.next('.validation').html((ierror ? (i.attr('data-msg') !== undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
-	        }
-	      });
-	      f.children('textarea').each(function() { // run all inputs
-	  
-	        var i = $(this); // current input
-	        var rule = i.attr('data-rule');
-	  
-	        if (rule !== undefined) {
-	          var ierror = false; // error flag for current input
-	          var pos = rule.indexOf(':', 0);
-	          if (pos >= 0) {
-	            var exp = rule.substr(pos + 1, rule.length);
-	            rule = rule.substr(0, pos);
-	          } else {
-	            rule = rule.substr(pos + 1, rule.length);
-	          }
-	  
-	          switch (rule) {
-	            case 'required':
-	              if (i.val() === '') {
-	                ferror = ierror = true;
-	              }
-	              break;
-	  
-	            case 'minlen':
-	              if (i.val().length < parseInt(exp)) {
-	                ferror = ierror = true;
-	              }
-	              break;
-	          }
-	          i.next('.validation').html((ierror ? (i.attr('data-msg') != undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
-	        }
-	      });
-	      if (ferror) {
-	    	  teste = false;
-	    	  return false;}
-	      else var str = $(this).serialize();
-    	  teste = true;
-	    });
-	      return teste;
+    return json;
 }
