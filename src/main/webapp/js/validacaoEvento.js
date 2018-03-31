@@ -1,131 +1,110 @@
-// var placeAtiv = false;
-// var eventos = [];
-// var cont = 0;
-// var data = new Date();
+window.onload = function(){
+	validar(document.getElementsByName("forms")[0]);
+};
 
-// function acionaEventos() {
-//     if(!placeAtiv) {
-//         adicionarPlaceholders();
-//     }
-//     mostraCalendario();
-//     mostraEventos();
-// }
+function validar(form) {
+    var feedback, input, valor, bool;
+    
+    feedback = form.getElementsByClassName("feedbackValidacao")[2].children[1];
+    
+    inputNome = document.getElementsByName("nome")[0];
+	inputEmail = document.getElementsByName("email")[0];
+	inputTel = document.getElementsByName("telefone")[0];
+	inputRamal = document.getElementsByName("ramal")[0];
+	inputMat = document.getElementsByName("matricula")[0];
 
-// function adicionarPlaceholders() {
-//     var dia = data.getDate(), mes = data.getMonth() + 1;
-
-//     if(data.getDate() < 10){
-//         dia = '0' + dia;
-//     }
-//     if(data.getMonth() < 10){
-//         mes = '0' + mes;
-//     }
-//     document.getElementById('dataInicio').placeholder =
-//         dia + '/' + mes + '/' + data.getFullYear() ;
-//     document.getElementById('dataFim').placeholder = '31/12/' + data.getFullYear() ;
-//     placeAtiv = true;
-// }
-
-// function mostraCalendario() {
-//     $(document).ready(function () {
-//         $('#dataInicio').datepicker({
-//             format: "dd/mm/yyyy",
-//             language: "pt-BR",
-//             startDate: '-1000d'
-//         });
-//         $('#dataFim').datepicker({
-//             format: "dd/mm/yyyy",
-//             language: "pt-BR",
-//             startDate: '-1000d'
-//         });
-//     });
-// }
-
-// function mostraEventos() {
-//     var evento = document.getElementById('eventos');
-
-//     if(!eventos.length > 0) {
-//         evento.innerHTML = "<h1 id='eventoh1'>Nao Existem Eventos</h1>";
-//     }
-//     if(eventos.length === 1) {
-//         evento.removeChild(document.getElementById('eventoh1'));
-//     }
-// }
-
-// function adicionarEvento() {
-//     var dataI = document.getElementById('dataInicio');
-//     var dataF = document.getElementById('dataFim');
-
-//     if(validarData()) {
-//         eventos.push({
-//             dataInicio: dataI.value,
-//             dataFim: dataF.value,
-//             estado: document.getElementById('estado').value,
-//             municipio: document.getElementById('municipio').value,
-//             indice: cont
-//         });
-
-
-//         //Criando o cartão
-//         var evento = document.getElementById('eventos');
-//         var cartao = document.createElement('div');
-//         var dia = document.createElement('div');
-//         var texto = document.createElement('div');
-//         cartao.className = 'cartao' + ' row';
-//         texto.className = 'textoEvento' + ' col-sm-8';
-//         dia.className = 'dia' + ' col-sm-4';
-//         dia.innerHTML = data.toDateString();
-//         texto.innerHTML = "<h3>Primeiro Evento de teste</h3>";
-//         cartao.appendChild(dia);
-//         cartao.appendChild(texto);
-//         evento.appendChild(cartao);
-//         cont++;
-
-//         mostraEventos();
-//     }else{
-//         dataI.oninvalid=alert('Por favor, Preencha os Campos de Data');
-//     }
-// }
-
-// function pesquisarEvento(dataI, dataF, estado, municipio) {
-//     var dataInicio = document.getElementById('dataInicio').value;
-//     var dataFim = document.getElementById('dataFim').value;
-//     var event = null;
-
-//     for(i = 0; i < eventos.length; i++){
-//         if(estado === eventos[i].estado || estado === 0){
-//             if(municipio === eventos[i].municipio || municipio === 0){
-//                 if(dataF <= dataFim && dataI >= dataInicio) {
-//                     event = eventos[i];
-//                     break;
-//                 }
-//             }
+	inputNome.onkeyup = function(){
+		inputNome.value = mascaraNome(inputNome.value);    
+	}
+	inputEmail.onkeyup = function(){
+		if(inputEmail.value == ''){
+			inputEmail.className = 'form-control';
+		}else{
+			if(mascaraEmail(inputEmail.value) == ''){
+	         	validacoesConfig(inputEmail, feedback, false, 'Email Invalido');	
+			}else{
+	         	validacoesConfig(inputEmail, feedback, true, '');
+			}
+		}
+	}
+	inputMat.onkeyup = function(){
+		inputMat.value = mascaraMat(inputMat.value);    
+	}
+	inputTel.onkeyup = function(){
+		inputTel.value = mascaraTel(inputTel.value);    
+	}
+	inputRamal.onkeyup = function(){
+		inputRamal.value = mascaraTel(inputRamal.value);    
+	}
+//               	bool = true;
+//         		mascara( this, mascaraTel);
+//               	validacoesConfig(input, feedback, true, '');
+//         	}
+//         	if(!bool){
+//                 bool = false;
+// 	        	alerta = 'Telefone Invalido';
+// 	          	validacoesConfig(input, feedback, bool, alerta);
+// 	        }
 //         }
-//     }
-//     if(event === null){
-//         alert("Evento Não Encontrado");
-//     }else{
-//         return event;
-//     }
-//     // (dataFim === dataFim.placeholder || dataInicio === dataInicio.placeholder)
-// }
+        
+//         // validar ramal
+//         if (input.name == "ramal") {
+// 		    var alerta, valor = input.value;
+// 		    if(valor  == null || valor == ''){
+// 	        	alerta = 'Ramal Invalido';
+//             	bool = false;
+// 		    }
+// 		    else if(isNaN(valor)){
+//             	bool = true;
+//             	alerta = '';
+// 		    }
+//           	validacoesConfig(input, feedback, bool, alerta);
+//         }
+    // }
+}
 
-// function validarData(){
-//     var dataI = document.getElementById('dataInicio');
-//     var dataF = document.getElementById('dataFim');
-//     if (!dataInicio.checkValidity()) {
-//         document.getElementById("dataInicio").innerHTML = dataInicio.validationMessage;
-//         return false;
-//     } else {
-//         document.getElementById("dataInicio").innerHTML = "Input OK";
-//         return true;
-//     } 
+//mascara
+ function mascaraTel(v){
+   v=v.replace(/\D/g,"", " ");             //Remove tudo o que não é dígito
+   v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+   v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+   return v;
+ }
 
-//     if (!dataFim.checkValidity()) {
-//         document.getElementById("dataFim").innerHTML = dataFim.validationMessage;
-//         return false;
-//     } else {
-//         document.getElementById("dataFim").innerHTML = "Input OK";
-//         return true;
-//     } 
-// }
+function mascaraNome(v){
+ 	v = v.replace(/[^A-Za-z ]/g,"");    //Remove todos caracteres que não sejam letras ou espaços
+    
+	return v;
+}
+ 
+
+function mascaraEmail(v){
+	var emailBr, emailCom;
+ 	emailBr = /^[a-z0-9._-]+@[a-z]+.[a-z]+.br/ig;
+ 	emailCom = /^[a-z0-9._-]+@[a-z]+.[a-z]/ig;
+    if(!emailBr.test(v) && !emailCom.test(v)){
+    	v = '';
+	}
+	return v;
+}
+
+function mascaraMat(v){
+ 	var a = v.substring(0, 1).replace(/[^cef]/g, "");
+	if(a == ''){
+		v = '';
+	}
+ 	var b =  v.substring(0, v.length).replace(/[^0-9]/g,"");
+    
+	return a+b;
+}
+
+function validacoesConfig(input, feedback, bool, alerta){
+	feedback.textContent = alerta;
+	if(!bool){
+		input.className = 'form-control is-invalid';
+		feedback.className = 'invalid-feedback';
+	}else{
+		input.className = 'form-control is-valid';
+		feedback.className = 'valid-feedback';
+	}
+}
