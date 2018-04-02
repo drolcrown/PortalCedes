@@ -91,7 +91,7 @@
 		</div>
 		<!-- FINAL -->
 		<h1 class="text-center">Faça sua Inscrição</h1>
-		<div id="inscricao" class="container-fluid">
+		<!-- <div id="inscricao" class="container-fluid">
 			<div class="container">
 				<div class="col-md-4"></div>
 				<div class="form">
@@ -135,6 +135,64 @@
 					</form>
 				</div>
 			</div>
+		</div> -->
+		<div id="inscricao" class="container-fluid">
+			<div class="container">
+				<div class="form">
+					<form action="" class="needs-validation">
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<div class="feedbackValidacao">
+									<input value="" type="text" class="form-control" name="nome" placeholder="Digite seu nome" >
+									<span></span>
+								</div>
+							</div>
+			
+							<div class="form-group col-md-6">
+								<div class="feedbackValidacao">
+									<input type="text" class="form-control" name="matricula" maxlength="7" placeholder="Digite sua matrícula" value="">
+									<span></span>
+								</div>
+							</div>
+			
+							<div class="form-group col-xs-6 col-sm-6">
+								<div class="feedbackValidacao">
+									<input type="email" class="form-control" name="email"  placeholder="Digite seu email" value="">
+									<span></span>
+								</div>
+							</div>
+													
+							<div class="form-group col-md-6">
+								<div class="feedbackValidacao">
+									<input type="text" class="form-control" name="unidade" placeholder="Digite sua unidade" value="">
+									<span></span>
+								</div>
+							</div>
+			
+							<div class="form-group col-md-6">
+								<div class="feedbackValidacao">
+									<input type="text" class="form-control" name="ramal" maxlength="9" placeholder="Digite seu ramal" value="">
+									<span></span>
+								</div>
+							</div>
+			
+							<div class="form-group col-xs-6 col-sm-6">
+								<div class="feedbackValidacao">
+									<input type="text" class="form-control" name="telefone" maxlength="11" placeholder= "Digite seu celular" value="">
+									<span></span>
+								</div>
+							</div>
+			
+						</div>
+						<br/>
+							<div class="form-group">
+								<div class="text-center">
+									<button class="btn btn-primary" type="button" id="btnvalidar" onmouseup="percorreForms(this.form, 'usuarios')" onclick="validar(this.form)">Enviar Cadastro</button>
+								</div>
+							</div>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -159,6 +217,7 @@
 	<script src="formvalid/formvalid.js"></script>
 	<script src="js/qrcode.min.js"></script>
 	<script src="js/calendarioEvento.js"></script>
+	<script src="js/validacaoEvento.js"></script>
 
 </body>
 

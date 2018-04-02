@@ -54,7 +54,21 @@ function validar(form) {
         
         //validar unidade
         if (input.name == "unidade") {
-        	validacoesConfig(input, feedback, true, '');
+			validacoesConfig(input, feedback, true, '');
+			// var alerta;
+            // if (valor === null || valor.length == 0 || /^\s+$/.test(valor)) {
+            // 	alerta = 'Digite um nome';
+            //     bool = false;
+            // }
+            // else if (!isNaN(valor)) {
+            // 	alert = 'Esse campo só aceita letras!';
+            // 	bool = false;
+            // }
+            // else{
+            // 	bool = true;
+            // 	alerta = '';
+            // }
+        	// validacoesConfig(input, feedback, bool, alerta);
         }
         
 //        // validar data
