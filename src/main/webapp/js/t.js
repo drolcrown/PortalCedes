@@ -3,7 +3,7 @@ function ativarForm(){
 };
 
 function validar() {
-    var input;
+    var feedback, input;
 
     if(event.srcElement.name != 'forms') {
         var form = document.getElementsByName('forms')[0];
@@ -47,10 +47,7 @@ function validarClick(form) {
             contador++;
         }
     }
-    if(contador == tamanho){
-        return true;
-    }
-    return false;
+    console.log(contador);
 }
 
 function validacoesConfig(input, feedback, bool, alerta){
@@ -81,13 +78,6 @@ function mascaras(input) {
     if(input.name == 'unidade'){
         return mascaraUni(input.value);
     }
-    if(input.name == 'data'){
-        return mascaraData(input.value);
-    }
-    if(input.name == 'hora'){
-        return mascaraHora(input.value);
-    }
-    return mascaraNome(input.value);
 }
 
 function mascaraTel(v){
@@ -101,45 +91,9 @@ function mascaraTel(v){
     return v;
 }
 
-function mascaraData(v){
-    var dia, mes, ano;
-    v=v.replace(/\D/g,"", " ");     //Remove todos caracteres que não sejam letras ou espaços
-    dia = v.substring(0,2);
-    mes = v.substring(2,4);
-    ano = v.substring(4,v.length);
-    if(dia > diaMeses[data.getMonth()]){
-        dia = '01';
-    }
-    if(mes > 12){
-        mes = acrescentarZero(data.getMonth()+1);
-    }
-    v = dia + "/" + mes + "/" + ano;
-    if(v.length <= 2) {
-        return '';
-    }
-    if(v.length > 10) {
-        v = v.substring(0, 10);
-    }
-    return v;
-}
-
 function mascaraNome(v){
     v = v.replace(/[^A-Za-z ]/g,"");    //Remove todos caracteres que não sejam letras ou espaços
     return v;
-}
-
-function mascaraHora(v){
-    v=v.replace(/\D/g,"", " ");
-    var hora = v.substring(0,2);
-    var min = v.substring(2,4);
-
-    if(hora > 23 || hora < 0){
-        hora = '';
-    }
-    if(min > 59 || min < 0){
-        min = '00';
-    }
-    return hora + ":" + min;
 }
 
 function mascaraUni(v){
@@ -165,10 +119,4 @@ function mascaraMat(v){
     var b =  v.substring(0, v.length).replace(/[^0-9]/g,"");
 
     return a+b;
-}
-
-function validarESalvar(bool, form, endpoint) {
-    if(bool) {
-        percorreForms(form, endpoint);
-    }
 }
