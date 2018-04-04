@@ -1,22 +1,55 @@
 function ativarForm(){
-    validar();
+    validar(null);
 };
 
-function validar() {
-    var input;
-
-    if(event.srcElement.name != 'forms') {
-        var form = document.getElementsByName('forms')[0];
+function validar(input) {
+    if(input == null) {
         input = event.srcElement;
+    }
+    if(input.name != ' ' && input.name != null && event.srcElement.name != 'forms') {
+        var form = document.getElementsByName('forms')[0];
 
         input.onkeyup = function(){
             input.value = mascaras(input);
         };
-        if(event.srcElement.name == 'button') {
-            form.onmousemove = function () {
-                validarClick(form);
+        form.onclick = function () {
+            var input2 = event.srcElement;
+
+            if(input2.name != ' ' && input2.name != null && input2.name != 'forms' &&
+                input2.name != 'button' && input2.name != 'reset'){
+
+                if (input2.name != input.name) {
+                    if (input.value.length != 0) {
+                        validarInput(input, input.parentElement.children[1]);
+                    }if(input2.parentElement.children[1].textContent != ''){
+                        validarInput(input2, input2.parentElement.children[1]);
+                    }
+                    validar(input2);
+                }
             }
         }
+    }
+}
+
+function validarInput(input, feedback){
+    if(input.required) {
+        validacoesConfig(input, feedback, true, '');
+        var valor = mascaras(input);
+        if (valor == null || valor == '' || valor.length == 0) {
+            validacoesConfig(input, feedback, false, 'Preencha este campo');
+        }else {
+            if (input.maxLength > valor.length) {
+                validacoesConfig(input, feedback, false, 'Preencha corretamente este campo');
+            }
+            if (!mascaraEmail(valor) && input.name == 'email') {
+                validacoesConfig(input, feedback, false, 'Email Invalido');
+            }
+            if (input.maxLength == valor.length) {
+                validacoesConfig(input, feedback, true, '');
+            }
+        }
+    }else{
+        validacoesConfig(input, feedback, true, '');
     }
 }
 
@@ -28,21 +61,7 @@ function validarClick(form) {
         input = form.getElementsByClassName("feedbackValidacao")[i].children[0];
         feedback = form.getElementsByClassName("feedbackValidacao")[i].children[1];
 
-        if(input.required) {
-            validacoesConfig(input, feedback, true, '');
-            if (input.value == null || input.value == '' || input.value.length == 0) {
-                validacoesConfig(input, feedback, false, 'Preencha este campo');
-            }else {
-                if (input.maxLength > input.value.length) {
-                    validacoesConfig(input, feedback, false, 'Preencha corretamente este campo');
-                }
-                if (!mascaraEmail(input.value) && input.name == 'email') {
-                    validacoesConfig(input, feedback, false, 'Email Invalido');
-                }
-            }
-        }else{
-            validacoesConfig(input, feedback, true, '');
-        }
+        validarInput(input, feedback);
         if(input.className == 'form-control'){
             contador++;
         }
@@ -61,6 +80,15 @@ function validacoesConfig(input, feedback, bool, alerta){
     }else{
         input.className = 'form-control';
         feedback.className = 'valid-feedback';
+    }
+}
+
+function resetarForm(form){
+    var tamanho = form.getElementsByClassName("feedbackValidacao").length;
+
+    for(i = 0 ; i < tamanho; i++) {
+        var input = form.getElementsByClassName("feedbackValidacao")[i].children[0];
+        input.className = 'form-control';
     }
 }
 
@@ -93,7 +121,7 @@ function mascaras(input) {
 function mascaraTel(v){
     v=v.replace(/\D/g,"", " ");             //Remove tudo o que não é dígito
     v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
-    if(v.length > 15){
+    if(v.length >= 15){
         v = v.substring(0, 14);
     }
     v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
